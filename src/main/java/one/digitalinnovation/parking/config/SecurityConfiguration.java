@@ -12,11 +12,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 @Configuration
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter 
+{
 
     @Override
     //Configura autenticação - Login
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception 
+    {
         auth.inMemoryAuthentication()
                 .withUser("user")
                 .password(passwordEncoder().encode("12345"))
@@ -27,7 +29,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     //Configura autorização
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception
+    {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()
@@ -46,7 +49,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() 
+    {
             return new BCryptPasswordEncoder();
     }
 
