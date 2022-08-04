@@ -22,10 +22,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Component
 @EnableSwagger2
-public class SwaggerConfig {
+public class SwaggerConfig
+{
 
     @Bean
-    public Docket getDocket() {
+    public Docket getDocket()
+    {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("one.digitalinnovation.parking"))
@@ -35,31 +37,37 @@ public class SwaggerConfig {
                 .securitySchemes(Arrays.asList(basicAuthScheme()));
     }
 
-    private SecurityContext actuatorSecurityContext() {
+    private SecurityContext actuatorSecurityContext() 
+    {
         return SecurityContext.builder()
                 .securityReferences(Arrays.asList(basicAuthReference()))
                 .build();
     }
 
-    private SecurityScheme basicAuthScheme() {
+    private SecurityScheme basicAuthScheme()
+    {
         return new BasicAuth("basicAuth");
     }
 
-    private SecurityReference basicAuthReference() {
+    private SecurityReference basicAuthReference()
+    {
         return new SecurityReference("basicAuth", new AuthorizationScope[0]);
     }
 
-    private List<SecurityScheme> basicScheme() {
-        List<SecurityScheme> schemeList = new ArrayList<>();
+    private List <SecurityScheme> basicScheme() 
+    {
+        List <SecurityScheme> schemeList = new ArrayList<>();
         schemeList.add(new BasicAuth("basicAuth"));
         return schemeList;
     }
 
-    private ApiKey apiKey() {
+    private ApiKey apiKey()
+    {
         return new ApiKey("apiKey", "Authorization", "header");
     }
 
-    private ApiInfo metaData() {
+    private ApiInfo metaData() 
+    {
         return new ApiInfoBuilder()
                 .title("Parking REST API")
                 .description("Spring Boot REST API for Parking")
@@ -68,6 +76,4 @@ public class SwaggerConfig {
                 .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0\"")
                 .build();
     }
-
-
 }
