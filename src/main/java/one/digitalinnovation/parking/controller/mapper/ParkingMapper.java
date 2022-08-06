@@ -11,23 +11,28 @@ import one.digitalinnovation.parking.controller.dto.ParkingDTO;
 import one.digitalinnovation.parking.model.Parking;
 
 @Component
-public class ParkingMapper {
+public class ParkingMapper 
+{
 
     private static final ModelMapper MODEL_MAPPER = new ModelMapper();
 
-    public ParkingDTO toParkingDTO(Parking parking) {
+    public ParkingDTO toParkingDTO(Parking parking) 
+    {
         return MODEL_MAPPER.map(parking, ParkingDTO.class);
     }
 
-    public List<ParkingDTO> toParkingDTOList(List<Parking> parkingList) {
+    public List <ParkingDTO> toParkingDTOList(List <Parking> parkingList)
+    {
         return parkingList.stream().map(this::toParkingDTO).collect(Collectors.toList());
     }
 
-    public Parking toParking(ParkingDTO dto) {
+    public Parking toParking(ParkingDTO dto)
+    {
         return MODEL_MAPPER.map(dto, Parking.class);
     }
 
-    public Parking toParkingCreate(ParkingCreateDTO dto) {
+    public Parking toParkingCreate(ParkingCreateDTO dto) 
+    {
         return MODEL_MAPPER.map(dto, Parking.class);
     }
 }
