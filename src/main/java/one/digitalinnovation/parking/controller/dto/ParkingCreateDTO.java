@@ -5,7 +5,7 @@ public class ParkingCreateDTO
 
     private String license, state, model, color;
 
-    public String getLicense() ]
+    public String getLicense() 
     {
         return license;
     }
