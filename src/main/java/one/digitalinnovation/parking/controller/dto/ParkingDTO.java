@@ -59,7 +59,8 @@ public class ParkingDTO
         this.model = model;
     }
 
-    public String getColor() {
+    public String getColor() 
+    {
         return color;
     }
 
