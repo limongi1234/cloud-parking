@@ -12,27 +12,32 @@ import one.digitalinnovation.parking.model.Parking;
 import one.digitalinnovation.parking.repository.ParkingRepository;
 
 @Service
-public class ParkingService {
+public class ParkingService
+{
 
     private final ParkingRepository parkingRepository;
 
-    public ParkingService(ParkingRepository parkingRepository) {
+    public ParkingService(ParkingRepository parkingRepository) 
+    {
         this.parkingRepository = parkingRepository;
     }
 
     @Transactional(readOnly = true)
-    public List<Parking> findAll() {
+    public List <Parking> findAll()
+    {
         return parkingRepository.findAll();
     }
 
     @Transactional(readOnly = true)
-    public Parking findById(String id) {
+    public Parking findById(String id)
+    {
         return parkingRepository.findById(id).orElseThrow(
                 () -> new ParkingNotFoundException(id));
     }
 
     @Transactional
-    public Parking create(Parking parkingCreate) {
+    public Parking create(Parking parkingCreate) 
+    {
         String uuid = getUUID();
         parkingCreate.setId(uuid);
         parkingCreate.setEntryDate(LocalDateTime.now());
@@ -41,13 +46,15 @@ public class ParkingService {
     }
 
     @Transactional
-    public void delete(String id) {
+    public void delete(String id) 
+    {
         findById(id);
         parkingRepository.deleteById(id);
     }
 
     @Transactional
-    public Parking update(String id, Parking parkingCreate) {
+    public Parking update(String id, Parking parkingCreate) 
+    {
         Parking parking = findById(id);
         parking.setColor(parkingCreate.getColor());
         parking.setState(parkingCreate.getState());
@@ -58,14 +65,16 @@ public class ParkingService {
     }
 
     @Transactional
-    public Parking checkOut(String id) {
+    public Parking checkOut(String id) 
+    {
         Parking parking = findById(id);
         parking.setExitDate(LocalDateTime.now());
         parking.setBill(ParkingCheckOut.getBill(parking));
         return parkingRepository.save(parking);
     }
 
-    private static String getUUID() {
+    private static String getUUID() 
+    {
         return UUID.randomUUID().toString().replace("-", "");
     }
 }
